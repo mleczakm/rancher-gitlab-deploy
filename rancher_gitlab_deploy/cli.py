@@ -159,7 +159,12 @@ def main(rancher_url, rancher_key, rancher_secret, environment, stack, service, 
                 'stackId': stack['id'],
                 'startOnCreate': True,
                 'launchConfig': {
-                    'imageUuid': ("docker:%s" % new_image)
+                    'imageUuid': ("docker:%s" % new_image),
+                    'labels': {
+                        'traefik.enable': 'true',
+                        'traefik.port': '80',
+                        'io.rancher.container.pull_image': 'always'
+                    }
                 }
             }
             try:
